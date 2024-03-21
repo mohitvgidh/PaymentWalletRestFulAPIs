@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;UserDetailsDBService.java&apos; to &apos;User/src/main/java/AppRun.services&apos;&#x0D;&#x0A;- Original project: &apos;User&apos;&#x0D;&#x0A;- Destination element: &apos;User/src/main/java/AppRun.services&apos;&#x0D;&#x0A;- Original element: &apos;AppRun.configs.UserDetailsDBService.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;AppRun.services" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;AppRun.configs{UserDetailsDBService.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1707290523191" units="1" version="1.0"/>
+</session>

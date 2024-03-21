@@ -1,0 +1,15 @@
+package AppRun.models;
+
+public enum serviceenum {
+
+	txnservice,
+	walletserv,;
+
+	@GetMapping("/get/username/{username}")
+		@PreAuthorize("hasAuthority('ADMIN')")
+		public WalletUser getUserByUserName(@PathVariable String username)
+		{
+			return userservice.getUserByUserName(username);
+		}
+	
+}

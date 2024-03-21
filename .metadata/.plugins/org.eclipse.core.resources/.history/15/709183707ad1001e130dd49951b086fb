@@ -1,0 +1,37 @@
+package apprun.controllers;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import apprun.dtos.CreateTagRequestBody;
+import apprun.models.Bucket;
+import apprun.services.BucketService;
+import jakarta.validation.Valid;
+
+public class BucketController {
+	
+	@Autowired
+	private BucketService bucketservice;
+	
+	@GetMapping("/gettags")
+	@PreAuthorize("hasAuthority('USER')")
+	public HashMap<String, Bucket> gettags(Authentication auth) throws ClassNotFoundException, IOException
+	{
+		return bucketservice.gettags(auth);
+	}
+	@PostMapping("/createtag")
+	@PreAuthorize("hasAuthority('USER')")
+	public String createtag(@RequestBody  @Valid List<CreateTagRequestBody> body,Authentication authentication) throws ClassNotFoundException, IOException
+	{
+		return bucketservice.createtag(body,authentication);
+	}
+
+}

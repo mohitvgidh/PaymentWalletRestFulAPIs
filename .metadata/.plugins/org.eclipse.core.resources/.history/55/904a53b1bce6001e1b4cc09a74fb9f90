@@ -1,0 +1,8 @@
+package AppRun.models;
+
+public enum serviceenum {
+
+	txnservice,
+	walletserv,
+	
+}

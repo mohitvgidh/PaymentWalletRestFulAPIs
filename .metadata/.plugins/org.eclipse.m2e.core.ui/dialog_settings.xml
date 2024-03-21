@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenModuleWizardParentPage">
+		<list key="moduleName">
+			<item value="Reports"/>
+			<item value="BudgetBucket"/>
+			<item value="Notification"/>
+			<item value="Transaction"/>
+			<item value="Wallet"/>
+			<item value="User"/>
+			<item value="com.demo.userservice"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item key="catalog" value="All Catalogs"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+			<item value="org.Reports"/>
+		</list>
+		<list key="groupId">
+			<item value="com.example"/>
+		</list>
+		<list key="artifactId">
+			<item value="Reports"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+			<item value="com.example.Reports"/>
+			<item value="com.example"/>
+			<item value="com.example.BudgetBucket"/>
+		</list>
+		<list key="name">
+			<item value="Notification"/>
+			<item value="Transaction"/>
+			<item value="WalletService"/>
+			<item value="User"/>
+		</list>
+		<list key="artifactId">
+			<item value="Reports"/>
+			<item value="paymentwallet.project"/>
+			<item value="BudgetBucket"/>
+			<item value="Notification"/>
+			<item value="Transaction"/>
+			<item value="Wallet"/>
+			<item value="User"/>
+			<item value="com.demo.userservice"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

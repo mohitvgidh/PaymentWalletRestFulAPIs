@@ -1,0 +1,5 @@
+package AppRun.models;
+
+public enum serviceenum {
+
+}

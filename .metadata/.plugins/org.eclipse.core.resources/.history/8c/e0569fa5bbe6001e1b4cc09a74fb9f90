@@ -1,0 +1,134 @@
+package AppRun.services;
+
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
+
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import AppRun.dtos.*;
+import AppRun.daos.CacheRepository;
+import AppRun.daos.TxnRepository;
+import AppRun.models.Transaction;
+import AppRun.models.TransactionStatus;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpHeaders;
+
+
+@Service
+public class TransactionService {
+
+	
+	@Autowired
+	private TxnRepository txnrepo;
+	
+	@Autowired
+	private CacheRepository cacherepo;
+	
+	private RestTemplate resttemplate=new RestTemplate();
+	
+	
+	
+	@Autowired
+	private KafkaTemplate<String,String> template;
+	
+	private ObjectMapper mapper=new ObjectMapper();
+	
+	private static final String CREATED_TXN_TOPIC="create_txn";
+	private static final String COMPLETED_TXN_TOPIC="complete_txn";
+	private static final String WALLET_UPDATED_TOPIC="wallet_update";
+	
+	public String getjwttoken()
+	{
+		String url = "http://localhost:9000/authenticate";
+		AuthenticateUserRequestData userdata=new AuthenticateUserRequestData();
+		String answer = this.resttemplate.postForObject(url, userdata, String.class);
+		return answer;
+		
+	}
+	public List<Transaction> getTxnsByUserName(String userid) {
+		// TODO Auto-generated method stub
+		List<Transaction> txns=txnrepo.getByUserName(userid);
+		
+		
+		
+		return txns;
+	}
+
+	public List<Transaction> getTxns() {
+		// TODO Auto-generated method stub
+		List<Transaction> txns=txnrepo.findAll();
+		
+		return txns;
+	}
+    
+	public void create(Transaction txn) throws JsonProcessingException {
+		// TODO Auto-generated method stub
+		
+    	txn.setTransactionstatus(TransactionStatus.valueOf("PENDING"));
+    	txnrepo.save(txn);
+    	
+		JSONObject sentload=new JSONObject();
+		sentload.put("sender", txn.getSenderid());
+		sentload.put("receiver", txn.getReceiverid());
+		sentload.put("amt", txn.getAmount());
+		sentload.put("desc", txn.getReason());
+		sentload.put("externaltxnid", txn.getTxnid());
+		
+		template.send(CREATED_TXN_TOPIC,this.mapper.writeValueAsString(sentload));
+		
+		
+		
+		
+		
+		
+	}
+	@KafkaListener(topics= {WALLET_UPDATED_TOPIC},groupId="walletupdate")
+    public void updatetxn(String msg) throws ParseException, JsonProcessingException
+    {
+		JSONObject receivedload=(JSONObject)new JSONParser().parse(msg);
+		String status=(String) receivedload.get("status");
+		String senderid=(String) receivedload.get("senderid");
+		String receiverid=(String) receivedload.get("receiverid");
+		String txnid=(String) receivedload.get("externaltxnid");
+		Double sendbalance=(Double)receivedload.get("sendbalance");
+		Double receivebalance=(Double)receivedload.get("receivebalance");
+		Double amt=(Double)receivedload.get("amt");
+		String bucketmsg=(String)receivedload.get("bucketupdatemsg");
+		
+		
+	    Transaction txn=txnrepo.getByTxnid(txnid);
+	    txn.setTransactionstatus(TransactionStatus.valueOf(status));
+	    txnrepo.save(txn);
+	    
+	    
+	    JSONObject sender=this.resttemplate.getForObject("http://localhost:9000/get/username/"+senderid, JSONObject.class);
+	    JSONObject receiver=this.resttemplate.getForObject("http://localhost:9000/get/username/"+receiverid, JSONObject.class);
+	    
+	    String senderemail=sender==null?null:(String)sender.get("email");
+	    String receiveremail=receiver==null?null:(String)receiver.get("email");
+	    JSONObject sentload=new JSONObject();
+		sentload.put("sender", senderemail);
+		sentload.put("receiver", receiveremail);
+		sentload.put("amt",amt);
+		sentload.put("sendbal", sendbalance);
+		sentload.put("recbal", receivebalance);
+		sentload.put("status", status);
+		sentload.put("externaltxnid", txnid);
+		sentload.put("bucketmsg", bucketmsg);
+		
+		template.send(COMPLETED_TXN_TOPIC, this.mapper.writeValueAsString(sentload));
+	    
+		
+    }
+
+}
