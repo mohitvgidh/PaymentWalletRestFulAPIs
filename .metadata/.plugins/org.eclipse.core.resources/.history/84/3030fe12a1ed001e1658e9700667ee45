@@ -1,0 +1,30 @@
+package App.Controllers;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import App.Model.Report;
+import App.dtos.ReportRequest;
+import jakarta.validation.Valid;
+
+@RestController
+public class ReportController {
+	
+	@GetMapping("/report/get")
+	public List<Report> getAllReports()
+	{
+		return null;
+	}
+	@PostMapping("/report/get/report")
+	public Report getReport(@RequestBody @Valid ReportRequest query)
+	{
+		return null;
+	}
+	
+
+
+}

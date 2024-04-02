@@ -1,0 +1,42 @@
+package App.Services;
+
+import App.Model.Transaction;
+import App.Model.TransactionList;
+import App.dtos.ReportRequest;
+import jakarta.validation.Valid;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.*;
+
+@Service
+public class ReportService {
+
+	
+	private RestTemplate resttemplate=new RestTemplate();
+	
+	public List<Transaction> getreport(@Valid ReportRequest query) throws ParseException {
+		// TODO Auto-generated method stub
+		 //2024-02-20 17:24:41.474
+		;
+		
+
+		String url = "http://localhost:6000/get/txn";
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		
+		TransactionList txns =this.resttemplate.postForObject(url,query,TransactionList.class);
+	    return txns.getTransacts();
+		
+		
+	}
+
+}

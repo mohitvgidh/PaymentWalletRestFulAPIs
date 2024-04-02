@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import apprun.dtos.CreateTagRequestBody;
-import apprun.models.Bucket;
+
 import apprun.models.Wallet;
 import apprun.services.WalletService;
 import jakarta.validation.Valid;

@@ -1,6 +1,5 @@
 package AppRun.services;
 
-import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -20,8 +19,14 @@ import AppRun.daos.CacheRepository;
 import AppRun.daos.TxnRepository;
 import AppRun.models.Transaction;
 import AppRun.models.TransactionStatus;
+import jakarta.validation.Valid;
+
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpHeaders;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @Service
@@ -96,15 +101,17 @@ public class TransactionService {
 		Double sendbalance=(Double)receivedload.get("sendbalance");
 		Double receivebalance=(Double)receivedload.get("receivebalance");
 		Double amt=(Double)receivedload.get("amt");
-		String bucketmsg=(String)receivedload.get("bucketupdatemsg");
+	
 		
 		
 	    Transaction txn=txnrepo.getByTxnid(txnid);
 	    txn.setTransactionstatus(TransactionStatus.valueOf(status));
+	    txn.setSendbalance(sendbalance);
+	    txn.setReceivebalance(receivebalance);
 	    txnrepo.save(txn);
 	   
-	    JSONObject sender=this.resttemplate.getForObject("http://localhost:9000/get/username/txnservice"+senderid, JSONObject.class);
-	    JSONObject receiver=this.resttemplate.getForObject("http://localhost:9000/get/username/txnservice"+receiverid, JSONObject.class);
+	    JSONObject sender=this.resttemplate.getForObject("http://localhost:9000/get/usernameservice/txnservice"+senderid, JSONObject.class);
+	    JSONObject receiver=this.resttemplate.getForObject("http://localhost:9000/get/usernameservice/txnservice"+receiverid, JSONObject.class);
 	    
 	    String senderemail=sender==null?null:(String)sender.get("email");
 	    String receiveremail=receiver==null?null:(String)receiver.get("email");
@@ -116,11 +123,26 @@ public class TransactionService {
 		sentload.put("recbal", receivebalance);
 		sentload.put("status", status);
 		sentload.put("externaltxnid", txnid);
-		sentload.put("bucketmsg", bucketmsg);
+		
 		
 		template.send(COMPLETED_TXN_TOPIC, this.mapper.writeValueAsString(sentload));
 	    
 		
     }
+
+	public List<Transaction> getTxnsByUserNameAndDateAndReason(String userid, @Valid ReportQueryRequestDate request) throws java.text.ParseException {
+		// TODO Auto-generated method stub
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"); //2024-02-20 17:24:41.474
+		Date fromdate = formatter.parse(request.getFromDate());
+		Date todate=formatter.parse(request.getToDate());
+		
+		String reason=request.getReason();
+		if(reason==null)
+			return txnrepo.getByDate(fromdate,todate,userid);
+		else
+			return txnrepo.getByDateAndReason(fromdate,todate,reason,userid);
+			
+		
+	}
 
 }

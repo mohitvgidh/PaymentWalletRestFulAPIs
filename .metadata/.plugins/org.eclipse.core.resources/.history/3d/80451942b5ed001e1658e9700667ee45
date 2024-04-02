@@ -1,0 +1,35 @@
+package App.Services;
+
+import App.dtos.ReportRequest;
+import jakarta.validation.Valid;
+import java.util.*;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.*;
+
+public class ReportService {
+
+	
+	private RestTemplate resttemplate=new RestTemplate();
+	
+	public void getreport(@Valid ReportRequest query) {
+		// TODO Auto-generated method stub
+		Date todate=query.getToDate();
+		Date fromdate=query.getFromDate();
+		String reason=query.getReason();
+		
+
+		String url = "endpoint url";
+		String requestJson = "{\"todate\":"+todate+","+"\"fromdate\":"+fromdate+","+"\"reason\":"+reason+"}";
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
+		String answer = this.resttemplate.postForObject(url, entity, String.class);
+		System.out.println(answer);
+		List<Transaction> transactions=this.resttemplate.getForObject(null, null)
+		
+	}
+
+}

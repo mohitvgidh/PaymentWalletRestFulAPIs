@@ -1,0 +1,22 @@
+package App.dtos;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ReportRequest {
+
+	@NotBlank
+	@JsonProperty("fromdate")
+	public Date FromDate;
+	
+	@NotBlank
+	@JsonProperty("todate")
+	public Date ToDate;
+}

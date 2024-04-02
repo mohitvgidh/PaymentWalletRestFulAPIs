@@ -1,0 +1,5 @@
+package AppRun.dtos;
+
+public class TransactionList {
+
+}

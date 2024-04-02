@@ -31,9 +31,9 @@ public class NotificationService {
 		Double sendbalance=(Double)receivedload.get("sendbal");
 		Double receivebalance=(Double)receivedload.get("recbal");
 		Double amt=(Double)receivedload.get("amt");
-		String bucketmsg=(String) receivedload.get("bucketmsg");
 		
-		String sendmsg=getSendermsg(status,sendbalance,amt,txnid,bucketmsg);
+		
+		String sendmsg=getSendermsg(status,sendbalance,amt,txnid);
 		String receivemsg=getReceivermsg(status,receivebalance,amt,txnid);
 		
 		if(sendmsg!=null && sendmsg.length()>0)
@@ -57,12 +57,12 @@ public class NotificationService {
 		
 		
 	}
-	private String getSendermsg(String status,Double sendbalance,Double amt,String txnid,String bucketmsg)
+	private String getSendermsg(String status,Double sendbalance,Double amt,String txnid)
 	{
 		String msg="";
 		if(status.equals("SUCCESS"))
 		{
-			msg=txnid+" : Your account is debited with amount "+amt.toString()+" ,available balance is "+sendbalance.toString()+". "+"\n"+bucketmsg;
+			msg=txnid+" : Your account is debited with amount "+amt.toString()+" ,available balance is "+sendbalance.toString()+". ";
 		}
 		else
 		{

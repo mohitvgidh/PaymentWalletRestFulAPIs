@@ -18,8 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import apprun.daos.CacheRepository;
 import apprun.daos.WalletRepository;
-import apprun.dtos.CreateTagRequestBody;
-import apprun.models.Bucket;
+
 import apprun.models.Wallet;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,9 +36,7 @@ public class WalletService {
 	@Autowired
 	private CacheRepository cacherepo;
 	
-	@Autowired
-	private BucketService bucketservice;
-	
+
 	@Autowired
 	private KafkaTemplate<String,String> template;
 	
@@ -102,8 +99,6 @@ public class WalletService {
 			obj.put("sendbalance",Senderwallet.getBalance());
 			obj.put("receivebalance",Receiverwallet.getBalance());
 			
-			String bucketupdatemsg=bucketservice.updateBuckets(tag, Senderwallet, amt);
-			obj.put("bucketupdatemsg",bucketupdatemsg);
 			walletrepo.save(Senderwallet);
 			walletrepo.save(Receiverwallet);
 			template.send(WALLET_UPDATED_TOPIC, this.mapper.writeValueAsString(obj));

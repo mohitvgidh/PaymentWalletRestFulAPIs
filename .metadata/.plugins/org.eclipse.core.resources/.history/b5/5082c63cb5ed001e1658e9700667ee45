@@ -1,0 +1,13 @@
+package App.Model;
+import java.util.*;
+
+public class TransactionList {
+	
+	private List<Transaction> transacts;
+	
+	public TransactionList()
+	{
+		transacts=new ArrayList<>();
+	}
+
+}

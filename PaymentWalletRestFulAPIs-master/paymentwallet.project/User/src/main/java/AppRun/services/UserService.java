@@ -120,6 +120,7 @@ public class UserService {
 		String secret=username.substring(0,10);
 		mp.put("txnservice", 1);
 		mp.put("walletserv", 1);
+		mp.put("reportserv", 1);
 		if(mp.containsKey(secret))
 			return true;
 		return false;

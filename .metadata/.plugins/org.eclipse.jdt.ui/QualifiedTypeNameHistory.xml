@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.validation.Valid"/>
-    <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter"/>
-    <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetailsService"/>
-    <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.User"/>
-    <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
-    <fullyQualifiedTypeName name="org.springframework.security.provisioning.InMemoryUserDetailsManager"/>
-    <fullyQualifiedTypeName name="org.springframework.security.web.SecurityFilterChain"/>
-    <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.builders.HttpSecurity"/>
-    <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.configuration.EnableWebSecurity"/>
-    <fullyQualifiedTypeName name="org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.authority.SimpleGrantedAuthority"/>
-    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
     <fullyQualifiedTypeName name="AppRun.daos.UserRepository"/>
     <fullyQualifiedTypeName name="AppRun.models.UserDetailsServiceEntity"/>
     <fullyQualifiedTypeName name="org.springframework.security.authentication.AuthenticationProvider"/>
@@ -36,7 +25,6 @@
     <fullyQualifiedTypeName name="apprun.models.Bucket"/>
     <fullyQualifiedTypeName name="apprun.dtos.CreateTagRequestBody"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
     <fullyQualifiedTypeName name="io.jsonwebtoken.Jwts"/>
@@ -57,7 +45,19 @@
     <fullyQualifiedTypeName name="org.springframework.security.web.authentication.WebAuthenticationDetailsSource"/>
     <fullyQualifiedTypeName name="org.springframework.security.config.http.SessionCreationPolicy"/>
     <fullyQualifiedTypeName name="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
+    <fullyQualifiedTypeName name="AppRun.dtos.ReportQueryRequestDate"/>
+    <fullyQualifiedTypeName name="App.Model.TransactionList"/>
+    <fullyQualifiedTypeName name="App.Model.Transaction"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="java.text.DateFormat"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="AppRun.models.Transaction"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="App.Model.Report"/>
+    <fullyQualifiedTypeName name="App.Model.WalletUser"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
 </qualifiedTypeNameHistroy>

@@ -46,5 +46,11 @@ public class Transaction implements Serializable{
 	@UpdateTimestamp
 	private Date updatedOn;
 	
+	@Column
+	private Double sendbalance;
+	
+	@Column
+	private Double receivebalance;
+	
 
 }

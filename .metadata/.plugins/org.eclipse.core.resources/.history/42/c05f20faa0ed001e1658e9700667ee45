@@ -1,0 +1,14 @@
+package App.Services;
+
+import App.dtos.ReportRequest;
+import jakarta.validation.Valid;
+
+public class ReportService {
+
+	public void getreport(@Valid ReportRequest query) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+}

@@ -1,0 +1,51 @@
+package AppRun.controllers;
+
+import java.text.ParseException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import AppRun.dtos.CreateTxnRequestData;
+import AppRun.dtos.ReportQueryRequestDate;
+import AppRun.models.Transaction;
+import AppRun.services.TransactionService;
+import jakarta.validation.Valid;
+
+@RestController
+public class TransactionController {
+
+
+	@Autowired
+	TransactionService txnservice;
+	
+	@PostMapping("/create")
+	
+	public void createTxn(@RequestBody @Valid CreateTxnRequestData data) throws JsonProcessingException
+	{
+		txnservice.create(data.to());
+	}
+	
+	@GetMapping("get/userdetails/{userid}")	
+
+	public List<Transaction> getTxnsByUserName(@PathVariable String userid)
+	{
+		return txnservice.getTxnsByUserName(userid);
+	}
+	
+	@PostMapping("get/txn/{userid}")	
+	public List<Transaction> getTxnsByUserNameAndDate(@PathVariable String userid,@RequestBody @Valid ReportQueryRequestDate request) throws ParseException
+	{
+		return txnservice.getTxnsByUserNameAndDateAndReason(userid,request);
+	}
+	
+	@GetMapping("/get")//get all transactions for analytics
+	
+	public List<Transaction> listtransactions()
+	{
+		return txnservice.getTxns();
+	}
+}

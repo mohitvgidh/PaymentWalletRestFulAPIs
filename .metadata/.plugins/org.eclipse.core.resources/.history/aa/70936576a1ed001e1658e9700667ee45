@@ -1,0 +1,21 @@
+package App.Services;
+
+import App.dtos.ReportRequest;
+import jakarta.validation.Valid;
+import java.util.*;
+import org.springframework.web.client.RestTemplate;
+
+public class ReportService {
+
+	
+	private RestTemplate resttemplate=new RestTemplate();
+	
+	public void getreport(@Valid ReportRequest query) {
+		// TODO Auto-generated method stub
+		Date todate=query.ToDate;
+		Date fromdate=query.FromDate;
+		
+		
+	}
+
+}
